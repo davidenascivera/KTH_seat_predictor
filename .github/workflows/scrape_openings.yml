@@ -20,14 +20,14 @@ jobs:
           pip install -r scraper_days/requirements.txt
           pip install jupyter nbconvert huggingface_hub
 
-      - name: List files in scraper_days
-        run: ls -R scraper_days
-
-      - name: Check notebook existence
-        run: test -f scraper_days/scraper_kth_days.ipynb && echo "Notebook found" || echo "Notebook not found"
+      - name: Ensure output directory exists
+        run: mkdir -p scraper_days
 
       - name: Run Jupyter Notebook
         env:
           HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
         run: |
           jupyter nbconvert --to notebook --execute scraper_days/scraper_kth_days.ipynb --output scraper_days/executed_notebook.ipynb
+
+      - name: Debug output
+        run: ls -R scraper_days
