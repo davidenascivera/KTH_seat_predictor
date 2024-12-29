@@ -1,7 +1,7 @@
 name: Run Notebook
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:    # Permette di avviare manualmente il workflow
 
 jobs:
   run-notebook:
@@ -18,7 +18,12 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r scraper_days/requirements.txt
-          pip install jupyter nbconvert nbclient huggingface_hub
+          pip install jupyter nbconvert huggingface_hub
+
+      - name: Debug environment variables
+        env:
+          HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
+        run: echo "HUGGINGFACE_TOKEN=${HUGGINGFACE_TOKEN}"
 
       - name: Run Jupyter Notebook
         env:
