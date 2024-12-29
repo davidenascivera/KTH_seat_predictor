@@ -1,7 +1,7 @@
 name: Run Notebook
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:    # Permette di avviare manualmente il workflow
 
 jobs:
   run-notebook:
@@ -17,18 +17,16 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r scraper_days/requirements.txt
-          pip install jupyter nbconvert huggingface_hub
-
-      - name: Ensure output directory exists
-        run: mkdir -p scraper_days
+          pip install jupyter nbconvert nbclient huggingface_hub
 
       - name: Run Jupyter Notebook
         env:
           HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
         run: |
           jupyter nbconvert --to notebook --execute scraper_days/scraper_kth_days.ipynb --output executed_notebook.ipynb
-          mv executed_notebook.ipynb scraper_days/executed_notebook.ipynb
 
-      - name: Debug output
-        run: ls -R scraper_days
+      - name: Upload executed notebook as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: executed-notebook
+          path: executed_notebook.ipynb
