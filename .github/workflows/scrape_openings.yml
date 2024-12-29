@@ -1,7 +1,7 @@
 name: Run Notebook
 
 on:
-  workflow_dispatch:    # Permette di avviare manualmente il workflow
+  workflow_dispatch:
 
 jobs:
   run-notebook:
@@ -20,10 +20,11 @@ jobs:
           pip install -r scraper_days/requirements.txt
           pip install jupyter nbconvert huggingface_hub
 
-      - name: Debug environment variables
-        env:
-          HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
-        run: echo "HUGGINGFACE_TOKEN=${HUGGINGFACE_TOKEN}"
+      - name: List files in scraper_days
+        run: ls -R scraper_days
+
+      - name: Check notebook existence
+        run: test -f scraper_days/scraper_kth_days.ipynb && echo "Notebook found" || echo "Notebook not found"
 
       - name: Run Jupyter Notebook
         env:
