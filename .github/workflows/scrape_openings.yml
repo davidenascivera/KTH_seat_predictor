@@ -1,0 +1,32 @@
+name: Run Notebook
+
+on:
+  workflow_dispatch:    # Allows you to trigger the workflow manually
+  schedule:
+    - cron: '0 0 1 1 *' # Runs once a year on January 1 at 00:00 UTC (optional)
+
+jobs:
+  run-notebook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install -r scraper_days/requirements.txt
+
+      - name: Run Jupyter Notebook
+        run: |
+          jupyter nbconvert --to notebook --execute scraper_days/scraper_kth_days.ipynb --output scraper_days/executed_notebook.ipynb
+
+      - name: Upload executed notebook as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: executed-notebook
+          path: scraper_days/executed_notebook.ipynb
