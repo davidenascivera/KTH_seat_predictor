@@ -1,4 +1,4 @@
-name: Check Hugging Face Repo Update (10 Minutes)
+name: Check Hugging Face Repository Update
 
 on:
   schedule:
@@ -6,39 +6,43 @@ on:
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
-  check-update:
+  check-repo-update:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: '3.9'
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
 
-    - name: Install dependencies
-      run: |
-        pip install --upgrade pip
-        pip install huggingface_hub
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install huggingface_hub
 
-    - name: Check Last Update
-      env:
-        HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
-      run: |
-        # Python script to check last update
-        python - <<EOF
-        from datetime import datetime, timedelta
-        from huggingface_hub import HfApi
+      - name: Check Hugging Face Repository Update
+        env:
+          HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
+        run: |
+          python <<EOF
+          from datetime import datetime, timedelta
+          from huggingface_hub import HfApi
 
-        # Initialize API
-        api = HfApi()
-        repo_name = "davnas/occupancy_perc"
-        last_updated = api.repo_info(repo_name, token="${{ secrets.HUGGINGFACE_TOKEN }}").lastModified
-        last_update_time = datetime.strptime(last_updated, "%Y-%m-%dT%H:%M:%S.%fZ")
-        now = datetime.utcnow()
+          # Initialize API
+          api = HfApi()
+          repo_name = "davnas/occupancy_perc"
+          token = "${{ secrets.HUGGINGFACE_TOKEN }}"
 
-        # Check if the last update was more than 10 minutes ago
-        if now - last_update_time > timedelta(minutes=10):
-            raise Exception(f"The repository '{repo_name}' has not been updated in over 10 minutes. Last update: {last_updated}")
-        else:
-            print(f"The repository '{repo_name}' was updated recently at {last_updated}.")
-        EOF
+          try:
+              last_updated = api.repo_info(repo_id=repo_name, repo_type="dataset", token=token).lastModified
+              last_update_time = datetime.strptime(last_updated, "%Y-%m-%dT%H:%M:%S.%fZ")
+              now = datetime.utcnow()
+
+              # Check if the last update was more than 10 minutes ago
+              if now - last_update_time > timedelta(minutes=10):
+                  raise Exception(f"The repository '{repo_name}' has not been updated in over 10 minutes. Last update: {last_updated}")
+              else:
+                  print(f"The repository '{repo_name}' was updated recently at {last_updated}.")
+          except Exception as e:
+              print(f"Failed to check repository: {e}")
+              raise
+          EOF
