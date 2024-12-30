@@ -2,7 +2,7 @@ name: Check Hugging Face Repository Update
 
 on:
   schedule:
-    - cron: "*/10 * * * *"  # Runs every 10 minutes
+    - cron: "*/3 * * * *"  # Runs every 10 minutes
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
