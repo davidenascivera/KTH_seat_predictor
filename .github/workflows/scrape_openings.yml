@@ -1,74 +1,36 @@
-name: Run Notebook Hourly
+name: Run Notebook
 
 on:
+  workflow_dispatch:    # Allows manual triggering of the workflow
   schedule:
-    - cron: "0 7-21 * * *"   # Runs every hour from 7 AM to 9 PM
-  workflow_dispatch:         # Allows manual triggering of the workflow
+    - cron: "0 9 * * 1,3,5"   # Runs at 9:00 AM UTC on Monday, Wednesday, and Friday
 
 jobs:
   run-notebook:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Check out the repository
       - name: Check out repository
         uses: actions/checkout@v2
 
-      # Step 2: Set up Python
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
           python-version: '3.9'
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         run: |
-          pip install --upgrade pip
-          pip install --upgrade jupyter nbconvert nbclient huggingface_hub joblib pandas numpy matplotlib
+          pip install jupyter nbconvert nbclient huggingface_hub matplotlib numpy pandas requests datasets joblib
+      
 
-      # Step 4: Debug Hugging Face Token (optional, remove after debugging)
-      - name: Debug Hugging Face Token
-        run: echo "Token is set"
-        env:
-          HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
-
-      # Step 5: Validate Hugging Face Downloads
-      - name: Validate Hugging Face Downloads
-        env:
-          HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
-        run: |
-          python -c "
-          from huggingface_hub import hf_hub_download
-          try:
-              hf_hub_download(repo_id='davnas/library_model', filename='prophet_model_KTH_Library.joblib')
-              print('Model downloaded successfully.')
-          except Exception as e:
-              print(f'Failed to download model: {e}')
-          "
-
-      # Step 6: Run Jupyter Notebook
       - name: Run Jupyter Notebook
         env:
           HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
         run: |
-          jupyter nbconvert --to notebook --execute training_inference/OBT_3_inference.ipynb \
-          --ExecutePreprocessor.timeout=600 --output executed_notebook.ipynb --stdout
+          jupyter nbconvert --to notebook --execute scraper_days/scraper_kth_days.ipynb \
+          --output executed_notebook.ipynb --stdout
 
-      # Step 7: Capture Notebook Errors (if any)
-      - name: Capture Notebook Errors
-        if: failure()
-        run: cat executed_notebook.ipynb
-
-      # Step 8: Upload executed notebook as artifact
       - name: Upload executed notebook as artifact
         uses: actions/upload-artifact@v3
         with:
           name: executed-notebook
-          path: executed_notebook.ipynb
-
-      # Step 9: Upload logs as artifact (if failure)
-      - name: Upload logs as artifact
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: notebook-logs
           path: executed_notebook.ipynb
