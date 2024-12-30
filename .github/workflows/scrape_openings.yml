@@ -25,7 +25,8 @@ jobs:
         env:
           HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
         run: |
-          jupyter nbconvert --to notebook --execute scraper_days/scraper_kth_days.ipynb --output executed_notebook.ipynb
+          jupyter nbconvert --to notebook --execute scraper_days/scraper_kth_days.ipynb \
+          --output executed_notebook.ipynb --stdout
 
       - name: Upload executed notebook as artifact
         uses: actions/upload-artifact@v3
