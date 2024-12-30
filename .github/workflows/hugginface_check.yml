@@ -33,15 +33,14 @@ jobs:
           token = "${{ secrets.HUGGINGFACE_TOKEN }}"
 
           try:
-              last_updated = api.repo_info(repo_id=repo_name, repo_type="dataset", token=token).lastModified
-              last_update_time = datetime.strptime(last_updated, "%Y-%m-%dT%H:%M:%S.%fZ")
+              last_update_time = api.repo_info(repo_id=repo_name, repo_type="dataset", token=token).lastModified
               now = datetime.utcnow()
 
               # Check if the last update was more than 10 minutes ago
               if now - last_update_time > timedelta(minutes=10):
-                  raise Exception(f"The repository '{repo_name}' has not been updated in over 10 minutes. Last update: {last_updated}")
+                  raise Exception(f"The repository '{repo_name}' has not been updated in over 10 minutes. Last update: {last_update_time}")
               else:
-                  print(f"The repository '{repo_name}' was updated recently at {last_updated}.")
+                  print(f"The repository '{repo_name}' was updated recently at {last_update_time}.")
           except Exception as e:
               print(f"Failed to check repository: {e}")
               raise
