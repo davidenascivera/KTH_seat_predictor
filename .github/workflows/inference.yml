@@ -25,7 +25,7 @@ jobs:
         env:
           HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
         run: |
-          jupyter nbconvert --to notebook --execute training_inference/new_notebook_name.ipynb \
+          jupyter nbconvert --to notebook --execute training_inference/OBT_3_inference.ipynb \
           --output executed_notebook.ipynb --stdout
 
       - name: Upload executed notebook as artifact
