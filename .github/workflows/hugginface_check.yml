@@ -37,7 +37,7 @@ jobs:
               now = datetime.now(timezone.utc)  # Make UTC timezone-aware
 
               # Check if the last update was more than 10 minutes ago
-              if now - last_update_time > timedelta(minutes=10):
+              if now - last_update_time > timedelta(minutes=2):
                   raise Exception(f"The repository '{repo_name}' has not been updated in over 10 minutes. Last update: {last_update_time}")
               else:
                   print(f"The repository '{repo_name}' was updated recently at {last_update_time}.")
