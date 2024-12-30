@@ -3,7 +3,7 @@ name: Run Notebook Hourly
 on:
   schedule:
     - cron: "0 7-21 * * *"   # Runs every hour from 7 AM to 9 PM
-  workflow_dispatch:    # Allows manual triggering of the workflow
+  workflow_dispatch:        # Allows manual triggering of the workflow
 
 jobs:
   run-notebook:
@@ -19,16 +19,17 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install huggingface_hub jupyter nbconvert nbclient
+          pip install --upgrade pip
+          pip install huggingface_hub jupyter nbconvert nbclient joblib pandas numpy matplotlib requests
 
       - name: Authenticate with Hugging Face
         env:
           HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
         run: |
           echo "Authenticating with Hugging Face..."
-          huggingface-cli login --add-to-git-credential --token "${{ secrets.HUGGINGFACE_TOKEN }}"
+          huggingface-cli login --token "${{ secrets.HUGGINGFACE_TOKEN }}"
 
-      - name: Verify Hugging Face Token
+      - name: Verify Hugging Face Authentication
         run: |
           huggingface-cli whoami
         env:
@@ -39,7 +40,7 @@ jobs:
           HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
         run: |
           jupyter nbconvert --to notebook --execute training_inference/OBT_3_inference.ipynb \
-          --output executed_notebook.ipynb --stdout
+          --output executed_notebook.ipynb
 
       - name: Upload executed notebook as artifact
         uses: actions/upload-artifact@v3
