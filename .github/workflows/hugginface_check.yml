@@ -24,7 +24,7 @@ jobs:
           HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
         run: |
           python <<EOF
-          from datetime import datetime, timedelta
+          from datetime import datetime, timedelta, timezone
           from huggingface_hub import HfApi
 
           # Initialize API
@@ -34,7 +34,7 @@ jobs:
 
           try:
               last_update_time = api.repo_info(repo_id=repo_name, repo_type="dataset", token=token).lastModified
-              now = datetime.utcnow()
+              now = datetime.now(timezone.utc)  # Make UTC timezone-aware
 
               # Check if the last update was more than 10 minutes ago
               if now - last_update_time > timedelta(minutes=10):
