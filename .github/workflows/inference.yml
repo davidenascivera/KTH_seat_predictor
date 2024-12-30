@@ -1,51 +1,41 @@
-name: Run Notebook Hourly
+name: Run Jupyter Notebook Inference
 
 on:
-  schedule:
-    - cron: "0 7-21 * * *"   # Runs every hour from 7 AM to 9 PM
-  workflow_dispatch:        # Allows manual triggering of the workflow
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   run-notebook:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v3
-        with:
-          python-version: '3.9'
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9' # You can set the desired Python version here
 
-      - name: Install dependencies
-        - name: Install dependencies
-          run: |
-            pip install --upgrade pip
-            pip install huggingface_hub jupyter nbconvert nbclient joblib pandas numpy matplotlib requests prophet
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install huggingface_hub jupyter nbconvert nbclient joblib pandas numpy matplotlib requests prophet
 
+    - name: Run Jupyter Notebook
+      run: |
+        jupyter nbconvert --to notebook --execute training_inference/OBT_3_inference.ipynb --output result.ipynb
+      env:
+        HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
 
-      - name: Authenticate with Hugging Face
-        env:
-          HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
-        run: |
-          echo "Authenticating with Hugging Face..."
-          huggingface-cli login --token "${{ secrets.HUGGINGFACE_TOKEN }}"
+    - name: Upload executed notebook
+      uses: actions/upload-artifact@v3
+      with:
+        name: executed-notebook
+        path: training_inference/result.ipynb
 
-      - name: Verify Hugging Face Authentication
-        run: |
-          huggingface-cli whoami
-        env:
-          HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
-
-      - name: Run Jupyter Notebook
-        env:
-          HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
-        run: |
-          jupyter nbconvert --to notebook --execute training_inference/OBT_3_inference.ipynb \
-          --output executed_notebook.ipynb
-
-      - name: Upload executed notebook as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: executed-notebook
-          path: executed_notebook.ipynb
+    - name: Debug - Check installed packages
+      if: ${{ failure() }}
+      run: pip freeze
