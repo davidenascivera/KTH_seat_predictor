@@ -19,7 +19,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install jupyter nbconvert nbclient huggingface_hub
+          pip install jupyter nbconvert nbclient huggingface_hub matplotlib numpy pandas requests datasets joblib
+      
 
       - name: Run Jupyter Notebook
         env:
