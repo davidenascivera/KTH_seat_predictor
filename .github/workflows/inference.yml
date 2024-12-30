@@ -1,0 +1,35 @@
+name: Run Notebook Hourly
+
+on:
+  schedule:
+    - cron: "0 7-21 * * *"   # Runs every hour from 7 AM to 9 PM
+  workflow_dispatch:    # Allows manual triggering of the workflow
+
+jobs:
+  run-notebook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install jupyter nbconvert nbclient huggingface_hub
+
+      - name: Run Jupyter Notebook
+        env:
+          HUGGINGFACE_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
+        run: |
+          jupyter nbconvert --to notebook --execute training_inference/new_notebook_name.ipynb \
+          --output executed_notebook.ipynb --stdout
+
+      - name: Upload executed notebook as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: executed-notebook
+          path: executed_notebook.ipynb
