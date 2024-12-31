@@ -20,7 +20,8 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install huggingface_hub jupyter nbconvert nbclient joblib pandas numpy matplotlib requests prophet sklearn
+          pip install huggingface_hub jupyter nbconvert nbclient joblib pandas numpy matplotlib requests prophet scikit-learn
+
 
       - name: Authenticate with Hugging Face
         env:
