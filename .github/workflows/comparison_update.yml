@@ -2,7 +2,7 @@ name: Run prediction vs reality comparison
 
 on:
   schedule:
-    - cron: "0 22 * * *"   # Runs every hour from 7 AM to 9 PM
+    - cron: "0 22 * * *"   # Runs at 22
   workflow_dispatch:        # Allows manual triggering of the workflow
 
 jobs:
