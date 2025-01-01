@@ -1,4 +1,4 @@
-name: Run comparison update 
+name: Run prediction vs reality comparison
 
 on:
   schedule:

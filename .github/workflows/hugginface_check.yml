@@ -1,4 +1,4 @@
-name: Check Hugging Face Repository Update
+name: Check if Scraper Works
 
 on:
   schedule:
