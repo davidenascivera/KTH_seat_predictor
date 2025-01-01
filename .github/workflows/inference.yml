@@ -1,4 +1,4 @@
-name: Run Notebook Hourly
+name: Run Inference Pipeline Hourly
 
 on:
   schedule:
