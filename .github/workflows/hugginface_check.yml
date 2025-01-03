@@ -38,7 +38,7 @@ jobs:
 
               # Check if the last update was more than 45 minutes ago
               if now - last_update_time > timedelta(minutes=45):
-                  raise Exception(f"The repository '{repo_name}' has not been updated in over 10 minutes. Last update: {last_update_time}")
+                  raise Exception(f"The repository '{repo_name}' has not been updated in over 45 minutes. Last update: {last_update_time} now is {now}")
               else:
                   print(f"The repository '{repo_name}' was updated recently at {last_update_time}.")
           except Exception as e:
