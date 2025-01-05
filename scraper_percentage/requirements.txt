@@ -1,0 +1,6 @@
+selenium
+webdriver-manager
+pandas
+huggingface_hub
+datasets
+firebase-admin
