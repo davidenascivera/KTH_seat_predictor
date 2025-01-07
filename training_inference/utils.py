@@ -71,3 +71,24 @@ def add_time_features(df):
 
     return df
 
+def prepare_model_features(df):
+    """
+    Prepare features for the model.
+    """
+    feature_cols = [
+        'Day of Week', 'Days Until Exam', 'Event',
+        'temperature_2m', 'precipitation', 'wind_speed_10m',
+        'time_until_open', 'time_until_close', 'is_open',
+        'hour', 'minute'
+    ]
+
+    return df[feature_cols]
+
+def calculate_metrics(actual, predicted):
+    """
+    Calculate model performance metrics.
+    """
+    return {
+        'mae': mean_absolute_error(actual, predicted),
+        'rmse': np.sqrt(mean_squared_error(actual, predicted))
+    }
