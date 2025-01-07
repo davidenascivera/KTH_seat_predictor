@@ -1,4 +1,4 @@
-name: Check if Scraper Works
+name: Check if Scraper Frequently
 
 on:
   schedule:
