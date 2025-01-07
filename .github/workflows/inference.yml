@@ -2,7 +2,7 @@ name: Run Inference Pipeline Hourly
 
 on:
   schedule:
-    - cron: "*/25 7-21 * * *"   # Runs every hour from 7 AM to 9 PM
+    - cron: "*/20 7-21 * * *"   # Runs every hour from 7 AM to 9 PM
   workflow_dispatch:        # Allows manual triggering of the workflow
 
 jobs:
