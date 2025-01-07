@@ -2,7 +2,7 @@ name: Check if Scraper Works
 
 on:
   schedule:
-    - cron: "*/30 * * * *"  # Runs every 10 minutes
+    - cron: "*/55 * * * *"  # Runs every 10 minutes
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
