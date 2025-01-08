@@ -2,7 +2,7 @@
 
 Welcome to the repository for the **Library Seating Prediction Project**! This repository includes all the pipelines and scripts required for predicting library occupancy and powering the associated web application. For a detailed overview of the project, refer to the [**ID2223_Scalable_Project.pdf**](ID2223_Scalable_Project.pdf).
 
-![Flowchart](images_data/Flowchart_2.png)  
+![Flowchart](images_data/Flowchart.png)  
 
 
 A dedicated branch utilizing the Hopsworks API has been created to enhance the project. While most scripts have been successfully ported to this branch, they are currently not scheduled for automated execution.
