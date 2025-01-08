@@ -35,17 +35,22 @@ Below is a brief description of each notebook:
 ## 1. Scraper Components
 
 ### 1.1 scraper_percentage
-This folder contains the most frequently used scraper to retrieve real-time library occupancy data. Every 3 minutes, it accesses the following website:  
-[**KTH Library Real-Time Occupancy**](https://www.kth.se/en/biblioteket/anvanda-biblioteket/oppettider-kontakt/besokare-i-realtid-1.1078198)  
-The scraper copies the page content and parses it to generate a final dataframe. The parsed values are immediately stored in the Firebase Database, ensuring live updates to the main website. Additionally, after every 10 data acquisitions, the data is pushed to the following Hugging Face link:  
-[**Occupancy Percentage Dataset**](https://huggingface.co/datasets/davnas/occupancy_perc)  
 
+This folder contains the most frequently used scraper for retrieving real-time library occupancy data. It includes all the necessary Docker components for deployment on a machine. Currently, the scraper is running 24/7 on a Raspberry Pi, with an automatic daily restart scheduled at 5:00 AM. 
+Every 3 minutes, the scraper accesses the following website:  
+[**KTH Library Real-Time Occupancy**](https://www.kth.se/en/biblioteket/anvanda-biblioteket/oppettider-kontakt/besokare-i-realtid-1.1078198)  
+The scraper captures the page content and parses it to produce a structured dataframe. The parsed data is immediately stored in the Firebase Database, ensuring real-time updates to the main website. Additionally, every 10 data acquisitions, the information is uploaded to the following Hugging Face repository:  
+[**Occupancy Percentage Dataset**](https://huggingface.co/datasets/davnas/occupancy_perc)  
+A GitHub Action has also been implemented to monitor the last update in the Hugging Face repository. If the update does not occur as expected, an error notification is sent via email, enabling prompt issue resolution.
+
+ 
 ### 1.2 scraper_days/scraper_kth_days.ipynb
-This notebook scrapes the opening and closing days and hours from the KTH library website, a critical feature for determining operational hours and identifying closure days. 
-The data is scraped from:  
-[**KTH Library Opening Hours**](https://www.kth.se/en/biblioteket/anvanda-biblioteket/oppettider-kontakt/oppettider-och-kontakt-1.853039)  
-Using Selenium, the scraper captures the page content, navigates through the "Next" button to gather additional data, and organizes the information into a structured dataframe. The resulting table is stored at:  
-[**Hugging Face: date_kth**](https://huggingface.co/datasets/davnas/date_kth)  
+
+This notebook scrapes the opening and closing days and hours from the KTH library website, a crucial feature for determining operational hours and identifying closure days. The notebook is executed automatically via a GitHub Action three times per week. 
+It retrieves data from [**KTH Library Opening Hours**](https://www.kth.se/en/biblioteket/anvanda-biblioteket/oppettider-kontakt/oppettider-och-kontakt-1.853039). 
+Using Selenium, the scraper captures the page content, navigates through the "Next" button to gather additional data, and organizes the information into a structured dataframe. 
+The resulting table is stored at [**Hugging Face: date_kth**](https://huggingface.co/datasets/davnas/date_kth).
+
 
 ### 1.3 scraper_calendar/scraper_calendar_KTH.ipynb
 This notebook is executed once per year to dynamically download information about exams and study sessions for the current academic year. The data is scraped from:  
@@ -56,6 +61,7 @@ The scraped data is stored at:
 ### 1.4 weatherData.ipynb
 This notebook logs past weather predictions by performing API requests using the OpenMeteo API. The resulting dataframe is available at:  
 [**Weather Dataset Project**](https://huggingface.co/datasets/andreitut/weatherDatasetProject)  
+the notebook is executed every hour.
 ---
 ## 2. Training and Inference
 
