@@ -1,6 +1,7 @@
 # Overview
 
-Welcome to the repository for the **Library Seating Prediction Project**! This repository contains all the pipelines and scripts used for predicting library occupancy and powering the accompanying web application. 
+Welcome to the repository for the **Library Seating Prediction Project**! This repository contains all the pipelines and scripts used for predicting library occupancy and powering the accompanying web application. You can find a detailed report of this project in [**ID2223_Scalable_Project.pdf**](ID2223_Scalable_Project.pdf).
+
 
 You can explore the live project at:  
 [**KTH Seating Website**](https://kthseating.netlify.app/)
