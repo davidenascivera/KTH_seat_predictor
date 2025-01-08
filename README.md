@@ -32,7 +32,7 @@ Below is a brief description of each notebook:
 
 
 ---
-## 1Scraper Components
+## 1. Scraper Components
 
 ### 1.1 scraper_percentage
 This folder contains the most frequently used scraper to retrieve real-time library occupancy data. Every 3 minutes, it accesses the following website:  
