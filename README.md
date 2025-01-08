@@ -18,52 +18,16 @@ You can explore the project at:
 
 The front end of this project is a static website built using React. It dynamically integrates data by fetching it from an online CSV hosted on Hugging Face and retrieves real-time occupancy data from a Firebase database, which is updated every 2 minutes.
 
-# Overview
-
-Welcome to the repository for the **Library Seating Prediction Project**! This repository contains all the pipelines and scripts used for predicting library occupancy and powering the accompanying web application. 
-
-You can explore the project at:  
-[**KTH Seating Website**](https://kthseating.netlify.app/)
-
-## Project Snapshots:
-- ![User Interface Example 1](images_data/UI_1)
-- ![User Interface Example 2](images_data/UI_2)
-
-## Key Features:
-- **Interactive Visualization**: The bar chart displays:
-  - **Darker Blue Bars**: Historical library occupancy for the current day.
-  - **Lighter Gray Bars**: Predicted future occupancy.
-  - **Colored Bars**: Current real-time occupancy.  
-- **Prediction Accuracy**: A second card on the webpage compares **predicted vs. actual occupancy** for a one-day-ahead forecast.
-  
-The front end of this project is a static website built using React. It dynamically integrates data by fetching it from an online CSV hosted on Hugging Face and retrieves real-time occupancy data from a Firebase database, which is updated every 2 minutes.
 
 
 
 
-
-The workflow includes routines for scraping academic calendar data, retrieving weather information, applying forecasting models (such as Prophet and others), and comparing predicted vs. actual seat occupancy. The central notebook, **OBT_3_inference_3.ipynb**, consolidates the entire process, covering data merging, model training, and inference in a streamlined workflow.
-
-A live demonstration of the project is available at:  
-[**KTH Seating Website**](https://kthseating.netlify.app/)
 
 ---
-
-
-
-
+# Workflows and actions 
+The workflow includes routines for scraping academic calendar data, retrieving weather information, applying forecasting models (such as Prophet and others), and comparing predicted vs. actual seat occupancy. The central notebook, **OBT_3_inference_3.ipynb**, consolidates the entire process, covering data merging, model training, and inference in a streamlined workflow.
 
 Below is a brief description of each notebook:
-
-
-
-
-
-
-
-
-
-
 
 ---
 
