@@ -63,6 +63,7 @@ The scraped data is stored at:
 This notebook logs past weather predictions by performing API requests using the OpenMeteo API. The resulting dataframe is available at:  
 [**Weather Dataset Project**](https://huggingface.co/datasets/andreitut/weatherDatasetProject)  
 the notebook is executed every hour.
+
 ---
 ## 2. Training and Inference
 
