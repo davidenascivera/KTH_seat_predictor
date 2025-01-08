@@ -67,7 +67,7 @@ the notebook is executed every hour.
 
 ### 2.1 training_inference/OBT_3_inference.ipynb
 This notebook is one of the most frequently used scripts, executed via GitHub Actions every 25 minutes between 7:00 and 21:30. Its primary purpose is to perform inference by downloading all necessary data and models, and generating predictions for both the current day and the next day.
-The models are stored in the [**davnas/library**](https://huggingface.co/davnas/library) model repository, with a separate model corresponding to each zone. 
+The models are stored in the [**davnas/library**](https://huggingface.co/davnas/library) model repository (private repo), with a separate model corresponding to each zone. 
 The results are stored and uploaded to the following Hugging Face repository links:
 - [**forecast_tomorrow.csv**](https://huggingface.co/datasets/davnas/library-occupancy/blob/main/forecast_tomorrow.csv): Contains predictions for the next day.  
 - [**data_2.csv**](https://huggingface.co/datasets/davnas/library-occupancy/blob/main/data_2.csv): Includes measurements for the current day and forecasts for the same day.  
