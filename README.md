@@ -1,13 +1,14 @@
 # Overview
 
-Welcome to the repository for the **Library Seating Prediction Project**! This repository contains all the pipelines and scripts used for predicting library occupancy and powering the accompanying web application. You can find a detailed report of this project in [**ID2223_Scalable_Project.pdf**](ID2223_Scalable_Project.pdf).
+Welcome to the repository for the **Library Seating Prediction Project**! This repository includes all the pipelines and scripts required for predicting library occupancy and powering the associated web application. For a detailed overview of the project, refer to the [**ID2223_Scalable_Project.pdf**](ID2223_Scalable_Project.pdf).
 
+A dedicated branch utilizing the Hopsworks API has been created to enhance the project. While most scripts have been successfully ported to this branch, they are currently not scheduled for automated execution.
 
-You can explore the live project at:  
+Explore the live project here:  
 [**KTH Seating Website**](https://kthseating.netlify.app/)
 
-# Project Snapshots:
-![User Interface Example 1](images_data/UI_1.png)
+# Project Snapshots
+![User Interface Example 1](images_data/UI_1.png)  
 ![User Interface Example 2](images_data/UI_2.png)
 
 ## Key UI Features:
