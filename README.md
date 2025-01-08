@@ -82,6 +82,8 @@ This notebook is used to train models that are subsequently added to the [davnas
 This notebook contains the exploratory data analysis (EDA) performed during the model development phase. 
 Due to the limited availability of historical data—starting only from December 12, the day the scraper was deployed—the dataset comprises just one month of records. This dataset does not fully reflect typical scenarios. In this notebook, the possibility of implementing Prophet was explored. Although Prophet performed reasonably well, XGBoost showed better results, particularly when using occupancy percentages aligned with the intended purpose of the model.
 
+### 2.4 training_inference/utils.py
+This script contains all model-independent transformations applied to the data used during inference and training. These transformations are designed to address and mitigate the issue of data skew, ensuring consistent and reliable model performance.
 
 
 ---
