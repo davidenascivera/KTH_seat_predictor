@@ -85,12 +85,12 @@ Due to the limited availability of historical data—starting only from December
 ---
 ## 3. Comparing and Logging
 
-### 3.1 log_forecast.ipynb
+### 3.1 log_forecast/log_forecast.ipynb
 This notebook is designed to log the predictions for the next day. Logging these predictions simplifies the process of comparing them with actual data, as predictions are recalculated every 25 minutes. 
 The logged predictions are stored in the following Hugging Face repository:  
 [**Library Occupancy Dataset**](https://huggingface.co/datasets/davnas/library-occupancy)
 
-### 3.2 comparison_pred_reality.ipynb
+### 3.2 comparison_update/comparison_pred_reality.ipynb
 This notebook compares past predictions with the actual data of the day. It serves two main purposes:
 1. To generate visualizations for the website's user interface.
 2. To log the performance metrics of the prediction models for further analysis.
