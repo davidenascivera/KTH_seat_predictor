@@ -49,7 +49,6 @@ A GitHub Action has also been implemented to monitor the last update in the Hugg
 This notebook scrapes the opening and closing days and hours from the KTH library website, a crucial feature for determining operational hours and identifying closure days. The notebook is executed automatically via a GitHub Action three times per week. 
 It retrieves data from [**KTH Library Opening Hours**](https://www.kth.se/en/biblioteket/anvanda-biblioteket/oppettider-kontakt/oppettider-och-kontakt-1.853039). 
 Using Selenium, the scraper captures the page content, navigates through the "Next" button to gather additional data, and organizes the information into a structured dataframe. 
-
 The resulting table is stored at [**Hugging Face: date_kth**](https://huggingface.co/datasets/davnas/date_kth).
 
 
