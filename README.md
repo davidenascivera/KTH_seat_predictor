@@ -6,8 +6,8 @@ You can explore the project at:
 [**KTH Seating Website**](https://kthseating.netlify.app/)
 
 ## Project Snapshots:
-- ![User Interface Example 1](images_data/UI_1)
-- ![User Interface Example 2](images_data/UI_2)
+- ![User Interface Example 1](images_data/UI_1.png)
+- ![User Interface Example 2](images_data/UI_2.png)
 
 ## Key UI Features:
 - **Interactive Visualization**: The bar chart displays:
