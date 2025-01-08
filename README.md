@@ -74,7 +74,7 @@ The results are stored and uploaded to the following Hugging Face repository lin
 
 
 ### 2.2 training_inference/Training_4_original.ipynb
-This notebook is used to train models that are subsequently added to the [davnas/library](https://huggingface.co/davnas/library) repository. It requires manual execution to ensure that the newly trained model performs better than the previous version.
+This notebook is used to train models that are subsequently added to the [davnas/library](https://huggingface.co/davnas/library) private repository. It requires manual execution to ensure that the newly trained model performs better than the previous version.
 
 ### 2.3 training_inference/EDA.ipynb
 This notebook contains the exploratory data analysis (EDA) performed during the model development phase. 
