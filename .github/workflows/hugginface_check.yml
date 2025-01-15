@@ -1,8 +1,8 @@
 name: Check if Scraper Frequently
 
 on:
-  schedule:
-    - cron: "*1/55 * * * *"  # Runs every 10 minutes
+  #schedule:
+  #  - cron: "*1/55 * * * *"  # Runs every 10 minutes
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
