@@ -21,7 +21,6 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install huggingface_hub jupyter nbconvert nbclient joblib pandas numpy matplotlib requests prophet scikit-learn cloudpickle
- 
 
       - name: Authenticate with Hugging Face
         env:
@@ -44,7 +43,7 @@ jobs:
           --output executed_notebook.ipynb
 
       - name: Upload executed notebook as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  #  Updated to v4
         with:
           name: executed-notebook
           path: executed_notebook.ipynb
